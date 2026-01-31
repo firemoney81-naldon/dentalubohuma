@@ -1,23 +1,613 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
-</html>
+
+
+        <!-- JSON-LD Structured Data for Naver SEO -->
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Service",
+          "serviceType": "치과 진료 서비스",
+          "provider": {
+            "@type": "Organization",
+            "name": "치과 가격 비교 가이드",
+            "url": "https://yourdomain.com",
+            "logo": "https://yourdomain.com/logo.png"
+          },
+          "areaServed": {
+            "@type": "State",
+            "name": "대한민국"
+          },
+          "description": "2026년 최신 치과 진료 비용 안내. 임플란트, 치아교정, 라미네이트 등 비급여 진료 항목의 가격 정보와 합리적인 선택을 위한 가이드를 제공합니다.",
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "주요 치과 비급여 진료 항목 가격 정보",
+            "itemListElement": [
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Product",
+                  "name": "치아 임플란트 (국산 정품, 뼈이식 제외)"
+                },
+                "priceSpecification": {
+                  "@type": "PriceSpecification",
+                  "price": "800000",
+                  "priceCurrency": "KRW",
+                  "description": "임플란트 식립 평균 비용 (치과별 가격 차이 있음)"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Product",
+                  "name": "치아교정 (클리피씨 전체교정)"
+                },
+                "priceSpecification": {
+                  "@type": "PriceSpecification",
+                  "price": "3500000",
+                  "priceCurrency": "KRW",
+                  "description": "전체 치아교정 평균 예상 금액 (분납 가능)"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Product",
+                  "@id": "https://yourdomain.com/dental_price_guide#veneer",
+                  "name": "치아 라미네이트 (개당)"
+                },
+                "priceSpecification": {
+                  "@type": "PriceSpecification",
+                  "price": "400000",
+                  "priceCurrency": "KRW",
+                  "description": "심미 치료 라미네이트 개당 평균 비용"
+                }
+              }
+            ]
+          },
+          "url": "https://yourdomain.com/dental_price_guide"
+        }
+        </script>
+
+        <!-- CSS Styling -->
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap');
+
+            body {
+                font-family: 'Noto Sans KR', sans-serif;
+                margin: 0;
+                padding: 0;
+                line-height: 1.8;
+                background-color: #f7f9fc; /* 부드러운 배경색 */
+                color: #333;
+            }
+            header {
+                background-color: #4CAF50; /* 치과 관련 메인 색상 (그린/민트 계열) */
+                color: white;
+                padding: 3rem 1.5rem;
+                text-align: center;
+                position: relative;
+                overflow: hidden;
+                border-bottom-left-radius: 50% 30px;
+                border-bottom-right-radius: 50% 30px;
+            }
+            header::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(135deg, rgba(76, 175, 80, 0.9), rgba(67, 160, 71, 0.8));
+                z-index: -1;
+            }
+            h1 {
+                font-size: 2.8rem;
+                font-weight: 700;
+                margin: 0 0 0.5rem 0;
+                letter-spacing: -1.5px;
+                text-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+            }
+            h2 {
+                color: #2e7d32; /* 진한 그린 */
+                font-size: 2rem;
+                margin-top: 2.5rem;
+                padding-bottom: 0.8rem;
+                border-bottom: 4px solid #4CAF50;
+                display: inline-block;
+                text-align: left;
+            }
+            h3 {
+                color: #1a5c1d;
+                font-size: 1.5rem;
+                margin-top: 1.5rem;
+                border-left: 5px solid #81C784;
+                padding-left: 1rem;
+            }
+            nav ul {
+                list-style: none;
+                padding: 0;
+                display: flex;
+                justify-content: center;
+                gap: 2rem;
+                margin-top: 1.5rem;
+            }
+            nav a {
+                color: white;
+                text-decoration: none;
+                font-weight: 700;
+                padding: 0.6rem 1.2rem;
+                border-radius: 20px;
+                background-color: rgba(255, 255, 255, 0.15);
+                transition: background-color 0.3s ease, transform 0.2s ease;
+            }
+            nav a:hover {
+                background-color: rgba(255, 255, 255, 0.3);
+                transform: translateY(-2px);
+            }
+            main {
+                max-width: 1000px;
+                margin: 2.5rem auto;
+                padding: 0 1.5rem;
+            }
+            section {
+                background-color: white;
+                padding: 3rem;
+                border-radius: 16px;
+                box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+                margin-bottom: 3rem;
+            }
+            section p, section ul, section ol, section dl {
+                font-size: 1.05rem;
+                line-height: 1.9;
+                color: #555;
+            }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 1.5rem;
+                font-size: 1rem;
+            }
+            th, td {
+                padding: 1.2rem;
+                text-align: left;
+                border: 1px solid #e0e0e0;
+            }
+            th {
+                background-color: #f1f8e9; /* 연한 그린 배경 */
+                color: #333;
+                font-weight: 700;
+                border-bottom: 2px solid #4CAF50;
+            }
+            tr:nth-child(even) {
+                background-color: #fafafa;
+            }
+            .price-highlight {
+                font-weight: 700;
+                color: #f44336; /* 강조 색상 (빨간색 계열) */
+                font-size: 1.2rem;
+            }
+            .cta-button {
+                display: inline-block;
+                background-color: #ff9800; /* 강조 색상 (오렌지 계열) */
+                color: white;
+                font-weight: 700;
+                padding: 1.2rem 2.5rem;
+                border-radius: 50px;
+                text-decoration: none;
+                margin: 2.5rem 0;
+                transition: background-color 0.3s ease, transform 0.2s ease;
+                text-align: center;
+                box-shadow: 0 6px 15px rgba(255, 152, 0, 0.4);
+            }
+            .cta-button:hover {
+                background-color: #fb8c00;
+                transform: translateY(-3px);
+            }
+            .keyword-tags {
+                margin: 1.5rem 0;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            .keyword-tags a {
+                background-color: #e8f5e9; /* 연한 그린 배경 */
+                color: #2e7d32;
+                padding: 8px 16px;
+                border-radius: 20px;
+                font-size: 0.95rem;
+                text-decoration: none;
+                transition: background-color 0.3s ease;
+            }
+            .keyword-tags a:hover {
+                background-color: #c8e6c9;
+            }
+            .external-links ul {
+                list-style-type: none;
+                padding: 0;
+            }
+            .external-links li {
+                margin-bottom: 15px;
+                position: relative;
+                padding-left: 20px;
+            }
+            .external-links li::before {
+                content: '🔗';
+                position: absolute;
+                left: 0;
+                color: #4CAF50;
+                font-size: 1.1rem;
+            }
+            .external-links a {
+                color: #0d47a1;
+                text-decoration: none;
+                font-weight: 600;
+            }
+            .external-links a:hover {
+                text-decoration: underline;
+            }
+            .check-list li {
+                position: relative;
+                padding-left: 25px;
+                margin-bottom: 10px;
+                list-style: none;
+            }
+            .check-list li::before {
+                content: '✓';
+                position: absolute;
+                left: 0;
+                top: 0;
+                color: #28a745;
+                font-weight: 700;
+            }
+            /* FAQ Accordion */
+            dl {
+                border: 1px solid #ddd;
+                border-radius: 8px;
+                padding: 0;
+                margin: 0;
+            }
+            dt {
+                background-color: #f9f9f9;
+                padding: 1.5rem;
+                cursor: pointer;
+                border-bottom: 1px solid #eee;
+                font-weight: 700;
+                color: #4a4a4a;
+                font-size: 1.1rem;
+                position: relative;
+                transition: background-color 0.3s ease;
+            }
+            dt:hover {
+                background-color: #f0f0f0;
+            }
+            dt::after {
+                content: '+';
+                position: absolute;
+                right: 1.5rem;
+                top: 50%;
+                transform: translateY(-50%);
+                font-size: 1.5rem;
+                line-height: 1;
+            }
+            dt.active {
+                background-color: #e8f5e9; /* 활성화된 항목 배경색 */
+            }
+            dt.active::after {
+                content: '-';
+            }
+            dd {
+                padding: 1.5rem;
+                margin: 0;
+                background-color: #ffffff;
+                border-bottom: 1px solid #eee;
+                display: none; /* 기본 숨김 */
+                font-size: 1rem;
+            }
+            /* Interactive elements (form simulation) */
+            form {
+                background-color: #fcfcfc;
+                padding: 2rem;
+                border-radius: 10px;
+                border: 1px dashed #ddd;
+            }
+            label {
+                display: block;
+                margin-bottom: 0.5rem;
+                font-weight: 700;
+                color: #333;
+            }
+            input[type="text"], input[type="email"], select, textarea {
+                width: 100%;
+                padding: 1rem;
+                margin-bottom: 1.5rem;
+                border: 1px solid #ccc;
+                border-radius: 8px;
+                box-sizing: border-box;
+                font-size: 1rem;
+                transition: border-color 0.3s ease;
+            }
+            input[type="text"]:focus, input[type="email"]:focus, select:focus, textarea:focus {
+                border-color: #4CAF50;
+                outline: none;
+            }
+            .form-group {
+                margin-bottom: 1.5rem;
+            }
+            .form-row {
+                display: flex;
+                gap: 20px;
+            }
+            .form-row > div {
+                flex: 1;
+            }
+            .submit-button {
+                background-color: #4CAF50;
+                color: white;
+                border: none;
+                padding: 1.2rem 2.5rem;
+                border-radius: 50px;
+                font-size: 1.1rem;
+                font-weight: 700;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            }
+            .submit-button:hover {
+                background-color: #388e3c;
+            }
+            /* 그래프 스타일링 (예시) */
+            .graph-container {
+                margin-top: 2rem;
+                background-color: #f9f9f9;
+                padding: 2rem;
+                border-radius: 10px;
+                border: 1px solid #eee;
+            }
+            .graph-bar {
+                background-color: #81C784;
+                color: #fff;
+                text-align: right;
+                padding: 0.5rem;
+                margin-bottom: 0.5rem;
+                border-radius: 4px;
+                font-size: 0.9rem;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            }
+            .graph-label {
+                width: 15%;
+                display: inline-block;
+                text-align: left;
+                font-weight: 600;
+            }
+            .graph-value {
+                width: 80%;
+                display: inline-block;
+            }
+            footer {
+                text-align: center;
+                padding: 2rem;
+                font-size: 0.9rem;
+                color: #888;
+                background-color: #e9ecef;
+                border-top-left-radius: 20px;
+                border-top-right-radius: 20px;
+                margin-top: 3rem;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>치과가격, 2026년 최신 정보로 완벽 비교 분석</h1>
+            <p><strong>임플란트, 치아교정, 라미네이트</strong> 등 주요 비급여 항목의 예상 견적과 합리적인 선택 기준을 제시합니다.</p>
+            <nav>
+                <ul>
+                    <li><a href="#implant">임플란트 비용</a></li>
+                    <li><a href="#ortho">치아교정 가격</a></li>
+                    <li><a href="#cosmetic">라미네이트 견적</a></li>
+                    <li><a href="#faq">자주 묻는 질문</a></li>
+                    <li><a href="#contact">상담 신청</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <section id="introduction">
+                <h2>치과 진료 비용, 왜 이렇게 차이가 날까요?</h2>
+                <p><strong>치과가격</strong>은 단순히 치과의사의 기술력이나 장비 수준만으로 결정되지 않습니다. 특히 임플란트, 치아교정, 라미네이트와 같은 <strong>비급여 진료</strong> 항목은 병원별로 가격 편차가 매우 크기 때문에, 환자 입장에서 <strong>치과 비용</strong>을 비교하고 합리적인 선택을 내리는 것이 중요합니다.</p>
+                <p>2026년 현재, 치과 비급여 진료비는 계속해서 증가하는 추세입니다. 보건복지부의 2025년 상반기 비급여 보고제도 분석 결과에 따르면, 치과 진료비가 전체 비급여 진료비의 상당 부분을 차지하며, 특히 <strong>임플란트 가격</strong>이 비급여 항목 중 가장 높은 비중을 차지했습니다. 이는 치과 진료에 대한 수요가 높아지고, 고난이도 비급여 치료의 필요성이 증가하고 있음을 의미합니다.</p>
+
+                <div class="keyword-tags" aria-label="치과 비용 관련 키워드">
+                    <a href="#implant">치아 임플란트 가격</a>
+                    <a href="#ortho">치아교정 예상 금액</a>
+                    <a href="#cosmetic">라미네이트 비용</a>
+                    <a href="#faq">치과 내돈내산 후기</a>
+                    <a href="#contact">치과 견적 비교</a>
+                    <a href="#faq">치과 저렴한곳 순위</a>
+                    <a href="#implant">임플란트 싼곳</a>
+                    <a href="#implant">2026 임플란트 보험</a>
+                    <a href="#ortho">치아교정 장단점</a>
+                    <a href="#implant">뼈이식 임플란트 비용</a>
+                </div>
+            </section>
+
+            <section id="implant">
+                <h2>치아 임플란트 가격: 핵심 요인 분석</h2>
+                <p>임플란트는 상실된 치아를 대체하는 가장 효과적인 방법으로, 최근 <strong>치과가격</strong> 검색에서 가장 높은 비중을 차지하는 항목입니다. 임플란트 <strong>비용</strong>은 환자의 구강 상태, 사용하는 재료, 그리고 치과의 시술 능력에 따라 크게 달라집니다.</p>
+
+                <h3>1. 임플란트 가격에 영향을 미치는 요소</h3>
+                <ol>
+                    <li><strong>뼈이식 여부:</strong> 임플란트 식립을 위해서는 충분한 잇몸뼈가 필요합니다. 잇몸뼈가 부족한 경우 <strong>뼈이식</strong>(골이식술)이 필수적으로 추가됩니다. <strong>뼈이식 비용</strong>은 평균적으로 40만원에서 100만원 이상까지 다양하게 형성되며, 수술 난이도에 따라 달라집니다. 잇몸뼈 이식 여부에 따라 최종 <strong>임플란트 가격</strong>이 결정됩니다.</li>
+                    <li><strong>임플란트 재료(픽스처):</strong> 국산 브랜드(오스템, 덴티움 등)와 수입 브랜드(스트라우만, 노벨 바이오케어 등)의 가격 차이가 큽니다. 일반적으로 수입 브랜드가 국산 브랜드보다 가격대가 높지만, 최근 국산 임플란트 기술력이 상향 평준화되면서 선호도도 높아지고 있습니다.</li>
+                    <li><strong>보철물 재료(크라운):</strong> 임플란트 상부에 씌우는 크라운 재료에 따라 가격이 달라집니다. 심미성이 뛰어나고 강도가 높은 <strong>지르코니아</strong> 크라운이 일반적으로 많이 사용되며, 금(골드)이나 PFM(금속에 도자기 코팅)보다 가격이 높게 책정되는 경우가 많습니다.</li>
+                    <li><strong>치과의 위치와 규모:</strong> 서울 강남 등 도심 지역의 치과가 상대적으로 <strong>임플란트 가격</strong>이 높게 형성되는 경향이 있습니다. 또한, 전문의의 경험이나 첨단 장비 보유 여부도 가격 책정의 요인으로 작용합니다.</li>
+                </ol>
+
+                <h3>2. 임플란트 평균 비용 및 2026년 동향</h3>
+                <p>임플란트는 2026년에도 여전히 가장 큰 비급여 진료비 지출 항목입니다. <strong>임플란트 평균 가격</strong>은 1개당 80만원 ~ 150만원 사이로 형성되지만, 뼈이식이나 기타 추가 시술이 포함되면 200만원을 초과할 수도 있습니다. 최근에는 저가 이벤트로 50만원대 <strong>임플란트 싼곳</strong>을 찾는 소비자도 많지만, 추가 비용 발생 여부와 사후관리 보증 기간을 꼼꼼히 확인해야 합니다.</p>
+            </section>
+
+            <section id="ortho">
+                <h2>치아교정 가격: 종류별 장단점과 예상 금액</h2>
+                <p><strong>치아교정 비용</strong>은 치료 기간이 길고 과정이 복잡하기 때문에 <strong>치과가격</strong> 중에서도 큰 부담으로 다가올 수 있습니다. 특히 <strong>치아교정 가격</strong>은 장치의 종류, 치료 난이도(발치 여부), 그리고 치과별 월별 관리비 등에 따라 천차만별입니다.</p>
+
+                <h3>1. 치아교정 장치별 예상 비용 및 장단점</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>장치 종류</th>
+                            <th>특징</th>
+                            <th>대략적인 가격 범위 (전체교정, 2026년 기준)</th>
+                            <th>장점 / 단점</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>메탈교정</strong></td>
+                            <td>가장 고전적인 방식. 금속 브라켓 사용.</td>
+                            <td><span class="price-highlight">300만원 ~ 400만원</span></td>
+                            <td>가장 저렴, 효과 확실 / 심미성 낮음, 통증↑</td>
+                        </tr>
+                        <tr>
+                            <td><strong>세라믹교정</strong></td>
+                            <td>치아색과 유사한 세라믹 브라켓 사용.</td>
+                            <td><span class="price-highlight">400만원 ~ 500만원</span></td>
+                            <td>심미성 우수 / 메탈보다 고가, 마찰력으로 인한 치료 기간 연장 가능성</td>
+                        </tr>
+                        <tr>
+                            <td><strong>클리피씨/데이몬교정</strong></td>
+                            <td>자가결찰 브라켓(똑딱이) 사용. 마찰력 감소.</td>
+                            <td><span class="price-highlight">450만원 ~ 600만원</span></td>
+                            <td>치료 기간 단축, 통증 감소 / 세라믹 대비 고가, 장치 탈락 위험성</td>
+                        </tr>
+                        <tr>
+                            <td><strong>인비절라인 (투명교정)</strong></td>
+                            <td>투명한 마우스피스형 교정 장치. 탈착 가능.</td>
+                            <td><span class="price-highlight">600만원 ~ 800만원 이상</span></td>
+                            <td>최고의 심미성, 탈착 편리 / 가격 매우 비쌈, 고난이도 치료에 한계</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p><strong>치아교정</strong>을 고려하는 분들은 <strong>치과가격</strong>을 알아볼 때 장치별 <strong>장단점</strong>을 명확히 이해해야 합니다. 특히 자가결찰 방식인 <strong>클리피씨</strong>와 <strong>데이몬</strong>은 기존 교정 방식보다 치료 기간이 단축될 수 있어 선호도가 높습니다.</p>
+
+                <h3>2. 추가 비용(월비) 및 분납 제도</h3>
+                <p><strong>치아교정 가격</strong> 견적을 받을 때는 초기 상담 비용 외에도 월별로 발생하는 관리비(월비)와 유지장치 비용을 반드시 확인해야 합니다. 많은 치과들이 환자의 부담을 덜어주기 위해 <strong>분납</strong> 제도를 운영하고 있으므로, 총 <strong>예상 금액</strong>을 꼼꼼히 따져보고 본인에게 맞는 방식을 선택하는 것이 중요합니다.</p>
+            </section>
+
+            <section id="cosmetic">
+                <h2>라미네이트 및 치아미백 견적: 심미 치료 가격 가이드</h2>
+                <p><strong>라미네이트</strong>와 <strong>치아미백</strong>은 치아의 심미적인 개선을 목적으로 하는 비급여 진료입니다. <strong>치과가격</strong> 중에서도 시술 범위나 디자인에 따라 가격 차이가 큰 편입니다. 특히 <strong>라미네이트 비용</strong>은 개당으로 책정되므로, 여러 개의 치아를 시술할 경우 총 <strong>예상 금액</strong>이 크게 증가합니다.</p>
+
+                <h3>1. 라미네이트 가격 변동 요인</h3>
+                <p><strong>라미네이트</strong>는 치아 겉면을 얇게 삭제한 후 세라믹 보철물을 부착하는 심미 치료입니다. <strong>라미네이트 가격</strong>은 재료와 시술 범위에 따라 크게 달라집니다. 재료별로 <strong>평균 가격</strong>은 30만원에서 80만원 이상까지 형성됩니다. <strong>무삭제 라미네이트</strong>는 치아 삭제량이 적어 선호되지만, 모든 환자에게 적용 가능한 것은 아니며, 비용도 일반 라미네이트와 크게 다르지 않습니다. <strong>내돈내산 후기</strong>를 참고할 때도 단순히 <strong>저렴한 곳</strong>을 찾기보다는, 정품 재료 사용 여부와 전문의의 심미 디자인 능력을 우선 고려해야 합니다.</p>
+
+                <h3>2. 치아미백 가격 및 장단점</h3>
+                <p><strong>치아미백</strong>은 치아 표면의 착색을 제거하여 밝게 만드는 시술입니다. <strong>치아미백 가격</strong>은 치과에서 진행하는 전문가 미백과 집에서 진행하는 자가 미백 키트 비용으로 나뉩니다. 치과 전문의에게 시술받는 경우 <strong>평균 비용</strong>은 20만원에서 50만원대이지만, 짧은 시간 안에 드라마틱한 효과를 볼 수 있습니다. 반면 자가 미백은 비교적 <strong>저렴한 가격</strong>으로 꾸준히 관리할 수 있다는 장점이 있습니다.</p>
+            </section>
+
+            <section id="faq">
+                <h2>자주 묻는 질문 (FAQ)</h2>
+                <p><strong>치과가격</strong>에 대한 궁금증을 해소하기 위해 <strong>치과 내돈내산 후기</strong>나 <strong>네이버 지식iN</strong>에서 자주 묻는 질문들을 정리했습니다.</p>
+                <dl>
+                    <dt tabindex="0" aria-expanded="false">Q1. 임플란트 <strong>치과가격</strong>이 싼 곳은 위험한가요?</dt>
+                    <dd>
+                        <p>A. 무조건 위험하다고 단정할 수는 없지만, <strong>임플란트 싼곳</strong>을 선택할 때는 신중해야 합니다. <strong>저렴한 가격</strong>을 앞세우는 경우, 값싼 재료를 사용하거나 <strong>뼈이식</strong>과 같은 필수 추가 시술을 제외하여 견적을 내는 경우가 있습니다. 또한 사후 관리(A/S 기간)가 짧거나, 전문의가 아닌 일반의가 시술하는 경우도 있으므로, <strong>치과 순위</strong>나 <strong>내돈내산 후기</strong>를 참고할 때 시술 경험이 풍부한지, 보증 기간은 충분한지를 함께 확인해야 합니다.</p>
+                    </dd>
+                    <dt tabindex="0" aria-expanded="false">Q2. <strong>치과 진료 비용</strong>에 보험 적용은 어디까지 되나요?</dt>
+                    <dd>
+                        <p>A. <strong>국민건강보험</strong>은 충치 치료(레진, 아말감), 스케일링, 잇몸 치료 등 기본적인 진료에 한하여 적용됩니다. <strong>임플란트</strong>의 경우 만 65세 이상 어르신에 한해 평생 2개까지 건강보험이 적용되지만, 그 외 연령대에서는 비급여 항목입니다. <strong>치아교정</strong>, <strong>라미네이트</strong>와 같은 심미 치료는 대부분 비급여 항목으로 건강보험 적용이 불가능합니다.</p>
+                        <p><strong>비급여 진료비</strong>는 2026년에도 계속 증가 추세이며, 정부는 과도한 가격 차이를 줄이기 위해 비급여 진료비 공개 제도를 확대하고 있습니다.</p>
+                    </dd>
+                    <dt tabindex="0" aria-expanded="false">Q3. <strong>치과교정</strong>, <strong>임플란트</strong> 치료 기간은 얼마나 걸리나요?</dt>
+                    <dd>
+                        <p>A. <strong>임플란트</strong>는 잇몸뼈 상태에 따라 달라지지만, 보통 뼈이식이 없는 경우 3~6개월, 뼈이식이 필요한 경우 6개월~1년 이상 소요됩니다. <strong>치아교정</strong>은 환자의 부정교합 정도에 따라 다르지만, 전체 교정은 평균 1년 6개월에서 2년 정도가 일반적입니다. 정확한 기간은 치과 전문의와 상담을 통해 결정됩니다.</p>
+                    </dd>
+                    <dt tabindex="0" aria-expanded="false">Q4. 치과 선택 시 <strong>내돈내산 후기</strong> 외에 어떤 점을 봐야 하나요?</dt>
+                    <dd>
+                        <p>A. <strong>치과 순위</strong>나 <strong>저렴한 곳 추천</strong> 글만 보고 치과를 선택하는 것은 위험합니다. 의료진의 전문성과 경험, 첨단 장비 보유 여부, 그리고 멸균 시스템 등 위생 관리를 확인하는 것이 중요합니다. 특히 <strong>치아교정</strong>은 교정 전문의가 상주하는지, <strong>임플란트</strong>는 전문의가 직접 상담부터 수술까지 진행하는지 확인해야 합니다.</p>
+                    </dd>
+                </dl>
+            </section>
+
+            <section class="external-links">
+                <h2>신뢰할 수 있는 외부 정보 참고하기</h2>
+                <p><strong>치과가격</strong>과 관련된 공신력 있는 외부 자료를 통해 더 정확한 정보를 얻으세요. 정부 기관 및 전문 협회의 자료를 참고하는 것이 합리적인 치료 선택에 도움이 됩니다.</p>
+                <ul>
+                    <li><a href="https://www.hira.or.kr/main.do" target="_blank">건강보험심사평가원 비급여 진료비 정보</a> (전국 치과 비급여 항목별 가격 비교)</li>
+                    <li><a href="https://www.ftc.go.kr/www/cpw/service/selectBusi.do?key=670&busiType=08" target="_blank">공정거래위원회 소비자 분쟁해결기준</a> (치과 치료 분쟁 시 참고)</li>
+                    <li><a href="https://www.molit.go.kr/" target="_blank">보건복지부 (보건의료정책 관련)</a> (의료 수가 및 제도 관련 공식 정보 확인)</li>
+                    <li><a href="https://www.akd.or.kr/" target="_blank">대한치과의사협회 (치과 전문가 단체)</a> (치아 건강 및 치료 정보 제공)</li>
+                    <li><a href="https://namu.wiki/w/%EC%B9%98%EA%B3%BC%20%EC%B9%98%EB%A3%8C" target="_blank">나무위키 치과 치료 항목</a> (다양한 치과 치료에 대한 일반 정보)</li>
+                </ul>
+            </section>
+
+            <section id="contact">
+                <h2>나만을 위한 정확한 치과 견적 상담 신청</h2>
+                <p><strong>치과가격</strong>은 개인의 구강 상태, 치료 난이도에 따라 달라지기 때문에 정확한 <strong>치과 견적</strong>을 받기 위해서는 정밀 진단이 필수입니다. 아래 양식에 정보를 남겨주시면 고객님의 상황에 맞는 맞춤형 상담을 도와드립니다.</p>
+                <form action="#" method="post">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">성함</label>
+                            <input type="text" id="name" name="name" placeholder="이름을 입력해주세요" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">연락처</label>
+                            <input type="text" id="phone" name="phone" placeholder="010-1234-5678" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">이메일 주소</label>
+                        <input type="email" id="email" name="email" placeholder="email@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="treatment_type">관심 있는 진료 항목</label>
+                        <select id="treatment_type" name="treatment_type" required>
+                            <option value="">-- 선택해주세요 --</option>
+                            <option value="implant">치아 임플란트</option>
+                            <option value="ortho">치아교정</option>
+                            <option value="cosmetic">라미네이트/미백</option>
+                            <option value="gums">잇몸 치료</option>
+                            <option value="other">기타</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="budget">예상 치료 금액대 (원하는 <strong>가격</strong> 범위)</label>
+                        <input type="text" id="budget" name="budget" placeholder="예: 100만원 ~ 200만원" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">문의 내용 (구체적인 <strong>견적</strong>을 위해 증상을 자세히 설명해주세요)</label>
+                        <textarea id="message" name="message" rows="5" placeholder="궁금한 점을 자세히 적어주시면 정확한 상담에 도움이 됩니다."></textarea>
+                    </div>
+                    <button type="submit" class="submit-button">상담 신청하기</button>
+                </form>
+            </section>
+        </main>
+
+        <script>
+            // FAQ 아코디언 기능 (접기/펼치기)
+            document.querySelectorAll('dl dt').forEach((dt) => {
+                dt.addEventListener('click', () => {
+                    // 모든 dd 닫기
+                    document.querySelectorAll('dl dd').forEach(dd => dd.style.display = 'none');
+                    document.querySelectorAll('dl dt').forEach(item => item.classList.remove('active'));
+
+                    // 현재 dt에 해당하는 dd 토글
+                    const nextDd = dt.nextElementSibling;
+                    if (nextDd && nextDd.tagName === 'DD') {
+                        if (nextDd.style.display === 'block') {
+                            nextDd.style.display = 'none';
+                            dt.setAttribute('aria-expanded', 'false');
+                        } else {
+                            nextDd.style.display = 'block';
+                            dt.setAttribute('aria-expanded', 'true');
+                            dt.classList.add('active');
+                        }
+                    }
+                });
+                dt.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        dt.click();
+                    }
+                });
+            });
+        </script>
+
+      
